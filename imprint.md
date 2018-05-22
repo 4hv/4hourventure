@@ -1,4 +1,4 @@
-###Imprint
+## Imprint
 
 Diese Seite ist ein publizistisches Angebot von:
 
@@ -12,9 +12,9 @@ Mail: andreas@dittes.info
 Inhaltlich Verantwortlicher gemäß § 10 Absatz 3 MDStV: 
 Andreas Dittes (Anschrift wie oben)
 
-###Haftungshinweis 
+### Haftungshinweis 
 Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
 
-###Werbung 
+### Werbung 
 Eigennützige Werbung in Kommentaren wird den betreffenden Firmen oder Einzelpersonen in Rechnung gestellt!
 Anfragen einer Werbepartnerschaft unter werbepartner@dittes.info möglich.
