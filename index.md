@@ -1,10 +1,10 @@
-## Welcome to 4 Hour Ventures
+# Welcome to 4 Hour Ventures
 
 _4 hour venture is an event format designed to validate ideas and built web-prototypes in just 4 hours. It’s like Startup Weekend but on steroids._
 
 _If you are interested in buying one of the projects, feel free to contact me via 4hv@dittes.info with the name of the project and the price you offer._
 
-### Projects
+## Projects
 
 - [Relax](http://relax.li)
 You need some relaxation? Just come to this website and enjoy a nice beach setting, a waterfall fireplace.
@@ -55,15 +55,12 @@ White noise is said to help us stimulate the brain and improve productivity. Wor
 Countdown to the new year. Perfect website to have open on dec 31st and use as countdown till the new year.
 
 - [Christmas Clock](christmas-clock.com)
-
 This clock is counting down to christmas. So you always know how long you have to wait for next christmas.
 
 - [Silvester Countdown](silvestercountdown.de)
-
 Countdown zum neuen Jahr – einfacher Dienst, der an einem Tag im Jahr populär ist.
 
 - [Jobtitel Generator](jobtitel.com)
-
 Der Jobtitel generator erzeugt dir einen hippen neuen Jobtitel inklusive passender Visitenkarte. Falls dich dein aktueller Job mal wieder etwas ankotzt.
 
 - [Welches Netz](welchesnetz.de)
@@ -74,14 +71,3 @@ Webseite, die dem Unendlichzeichen gewidmet ist. Hier kann man das Unendlichzeic
 
 - [Twidee](twidee.de)
 Du bist auf der Suche nach neuen Ideen? Lass die Crowd für dich arbeiten! Twidee bringt dir neue Ideen, die von Twitter Nutzern veröffentlicht werden.
-
-
-
-
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
