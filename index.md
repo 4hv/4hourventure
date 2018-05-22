@@ -1,22 +1,81 @@
-## Welcome to GitHub Pages
+## Welcome to 4 Hour Ventures
 
-You can use the [editor on GitHub](https://github.com/4hv/4hourventure/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+_4 hour venture is an event format designed to validate ideas and built web-prototypes in just 4 hours. It’s like Startup Weekend but on steroids. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+If you are interested in buying one of the projects, feel free to contact me via 4hv@dittes.info with the name of the project and the price you offer._
 
-### Markdown
+### Projects
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- [Relax] (http://relax.li)
+You need some relaxation? Just come to this website and enjoy a nice beach setting, a waterfall fireplace.
 
-```markdown
-Syntax highlighted code block
+- [Solar System Demo] (solarsystemdemo.com)
+This site demonstrates how our solar system works in 3D. You can also view it on your mobile device.
 
-# Header 1
-## Header 2
-### Header 3
+- [Weather Layer] (weatherlayer.com)
+Want to know how the weather is all over the world? Use this map to browse the world and see the actual weather and clouds.
 
-- Bulleted
-- List
+- [This website might be for sale] (thiswebsitemightbeforsale.com)
+Do you want to get offers for your web projects? We make it pretty easy for potential buyers to get in contact with you. With just one line of Javascript.
+
+- [Binaural] (binaural.co)
+Take a moment to relax with these stimulating binaural ASMR sounds. CAUTION: This website might cause you brain orgasms!
+
+Unicode Table unicodetable.org
+This website offers you the full unicode tables. You can search for a specific sign or just browse the huge catalogue.
+
+Everyday Hack everydayhack.com
+Have you ever been surprised on how a little trick can make your life way easier? This site is dedicated for those little hacks we can apply every day.
+
+- [Job Title Generator] (jobtitle.co)
+Create your own job title with this handy job title generator. The site generates over 1 million different job titles and generates a nice business card preview for you.
+
+- [Job interview] at (jobinterview.at)
+Want to apply for a job at a big company? Sometimes they have very strange questions they will throw at you when you have the job interview. Prepare yourself…
+
+- [Tweedees] (tweedees.com)
+You are in need for a new idea? Let the crowd do the work for you. Tweedees offers you a stream of new ideas sourced by Twitter users.
+
+HTML Colour Codes html-colour-codes.info
+Easy way to find out HTML color codes. targeted at the british english audience – hence the domain with “ou”.
+
+goSPY gospy.org
+Find out what information is stored on your smartphone pictures. We show you the geo location and various other information thats stored in the picture.
+
+Catfront catfront.com
+Cute cat licking your screen. You have to see this! Some people cant stop watching for hours.
+
+Dogfront dogfront.com
+What a nice puppy licking your screen all clean. Check it out and be amazed…
+
+White Noise white-noise.net
+White noise is said to help us stimulate the brain and improve productivity. Works best with headphones.
+
+New Year’s Countdown newyearscountdown.org
+Countdown to the new year. Perfect website to have open on dec 31st and use as countdown till the new year.
+
+Christmas Clock christmas-clock.com
+This clock is counting down to christmas. So you always know how long you have to wait for next christmas.
+
+German:
+Silvester Countdown silvestercountdown.de
+Countdown zum neuen Jahr – einfacher Dienst, der an einem Tag im Jahr populär ist.
+
+Jobtitel Generator jobtitel.com
+Der Jobtitel generator erzeugt dir einen hippen neuen Jobtitel inklusive passender Visitenkarte. Falls dich dein aktueller Job mal wieder etwas ankotzt.
+
+Welches Netz welchesnetz.de
+Mobilfunknetz Informationen zu den Handynetzen mit Rufnummer-Auskunft
+
+Unendlichzeichen unendlichzeichen.de
+Webseite, die dem Unendlichzeichen gewidmet ist. Hier kann man das Unendlichzeichen auch einfach kopieren, wenn man es mal schnell braucht.
+
+Twidee twidee.de
+Du bist auf der Suche nach neuen Ideen? Lass die Crowd für dich arbeiten! Twidee bringt dir neue Ideen, die von Twitter Nutzern veröffentlicht werden.
+
+
+
+
 
 1. Numbered
 2. List
@@ -24,14 +83,3 @@ Syntax highlighted code block
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/4hv/4hourventure/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
