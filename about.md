@@ -1,4 +1,4 @@
-### About 4 Hour Ventures
+###About 4 Hour Ventures
 
 4 hour venture is an event format designed to validate ideas and built web-prototypes in just 4 hours. It’s like Startup Weekend but on steroids. 
 
