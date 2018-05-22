@@ -36,7 +36,7 @@ Want to apply for a job at a big company? Sometimes they have very strange quest
 - [Tweedees](tweedees.com)
 You are in need for a new idea? Let the crowd do the work for you. Tweedees offers you a stream of new ideas sourced by Twitter users.
 
-- [HTML Colour](Codes html-colour-codes.info)
+- [HTML Colour Codes](html-colour-codes.info)
 Easy way to find out HTML color codes. targeted at the british english audience – hence the domain with “ou”.
 
 - [goSPY](gospy.org)
@@ -71,3 +71,5 @@ Webseite, die dem Unendlichzeichen gewidmet ist. Hier kann man das Unendlichzeic
 
 - [Twidee](twidee.de)
 Du bist auf der Suche nach neuen Ideen? Lass die Crowd für dich arbeiten! Twidee bringt dir neue Ideen, die von Twitter Nutzern veröffentlicht werden.
+
+Made with &hearts; in Berlin. [About](https://4hourventure.com/about) & [Imprint](https://4hourventure.com/imprint)
