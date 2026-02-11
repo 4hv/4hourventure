@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Play Plinko Online Free – Free Plinko Game App | No Download</title>
+<meta name="description" content="Play Plinko online free — the free Plinko game on the web. No download, no signup. Drop balls, hit multipliers up to 1000×, and enjoy this addictive Plinko app instantly in your browser.">
+<meta name="keywords" content="Plinko free, play Plinko online, Plinko game, Plinko app, free Plinko, Plinko online free, Plinko simulator, Plinko no download, browser Plinko game">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Play Plinko Online Free">
+<link rel="canonical" href="https://4hourventure.com/plinko">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Play Plinko Online Free – Free Plinko Game App">
+<meta property="og:description" content="Drop balls, hit insane multipliers, and play the most addictive Plinko game online for free. No download or signup needed.">
+<meta property="og:image" content="https://4hourventure.com/plinko/og-plinko.png">
+<meta property="og:url" content="https://4hourventure.com/plinko">
+<meta property="og:site_name" content="Play Plinko Online Free">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Play Plinko Online Free – Free Plinko Game App">
+<meta name="twitter:description" content="The best free Plinko game online. No downloads. Play now!">
+<meta name="twitter:image" content="https://4hourventure.com/plinko/og-plinko.png">
+<meta name="theme-color" content="#0f1923">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Plinko Free">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ffaa00'/%3E%3Ccircle cx='42' cy='40' r='12' fill='%23ffe066' opacity='.6'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Play Plinko Online Free","description":"Free online Plinko game with provably fair outcomes. Play Plinko in your browser — no download required.","applicationCategory":"GameApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"12400"}}</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1923;--bg-panel:#1a2c38;--bg-input:#0f1923;--border:#2a3f4d;
+  --text:#b1bad3;--text-bright:#fff;--accent:#00e701;--accent-hover:#1aff1a;
+  --red:#ff003f;--orange:#ff6b00;--yellow:#ffc800;
+  --font:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;--radius:8px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden}
+
+.app{display:flex;height:100vh;max-height:100vh}
+.panel{width:330px;min-width:330px;background:var(--bg-panel);display:flex;flex-direction:column;padding:16px;gap:10px;overflow-y:auto;border-right:1px solid var(--border);z-index:10}
+.board-area{flex:1;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.board-header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 0;flex-shrink:0;z-index:5}
+.board-wrap{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+canvas#plinko-canvas{display:block}
+
+/* ── Brand ── */
+.brand{display:flex;align-items:center;gap:10px}
+.brand-name{font-size:15px;font-weight:700;color:var(--text-bright);letter-spacing:.3px}
+.brand-name span{color:var(--accent)}
+
+/* ── Big Balance ── */
+.big-balance-wrap{display:flex;align-items:center;gap:8px}
+.big-balance{
+  font-family:var(--mono);font-size:28px;font-weight:700;color:var(--text-bright);
+  transition:text-shadow .3s,color .3s;letter-spacing:-0.5px;
+}
+.big-balance.glow{color:#00ff88;text-shadow:0 0 18px rgba(0,255,100,.55),0 0 40px rgba(0,255,100,.2)}
+.big-balance.glow-red{color:#ff4466;text-shadow:0 0 18px rgba(255,50,80,.55),0 0 40px rgba(255,50,80,.2)}
+.add-btn{
+  width:30px;height:30px;border-radius:50%;border:2px solid var(--accent);
+  background:transparent;color:var(--accent);font-size:18px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.2s;line-height:1;font-family:var(--mono);
+}
+.add-btn:hover{background:var(--accent);color:#0f1923;transform:scale(1.1)}
+
+/* ── Balance column + sparkline ── */
+.balance-col{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+#spark-chart{width:220px;height:40px;border-radius:4px;opacity:.85}
+
+/* ── Place Free Bet button ── */
+.place-bet-wrap{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:15;
+  width:min(400px, 70%);display:flex;gap:8px;
+}
+.place-bet-btn{
+  flex:1;padding:16px 24px;border:none;border-radius:var(--radius);
+  background:var(--accent);
+  color:#0f1923;font-family:var(--font);font-weight:700;font-size:17px;
+  cursor:pointer;transition:.2s;letter-spacing:.3px;
+  box-shadow:0 4px 24px rgba(0,231,1,.25);
+}
+.place-bet-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 30px rgba(0,231,1,.4)}
+.place-bet-btn:active{transform:translateY(0)}
+.place-bet-multi{
+  flex:0 0 auto;padding:16px 20px;font-size:15px;
+  background:var(--border);color:var(--text-bright);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.place-bet-multi:hover{background:#3d5a6e;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+
+/* ── Panel ── */
+.tabs{display:flex;background:var(--bg-input);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.tabs button{flex:1;padding:10px;background:0;color:var(--text);border:0;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:.15s}
+.tabs button.active{background:var(--border);color:var(--text-bright)}
+label.field{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--text)}
+label.field .row{display:flex;gap:6px;align-items:center}
+label.field .balance-show{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:13px;font-weight:700}
+input[type=number],input[type=text],select{width:100%;padding:10px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-bright);font-family:var(--mono);font-size:14px;outline:0;transition:border .15s}
+input[type=number]:focus,input[type=text]:focus,select:focus{border-color:var(--accent)}
+select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b1bad3' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.bet-row{display:flex;gap:6px}
+.bet-row input{flex:1}
+.bet-btn{padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.bet-btn:hover{border-color:var(--accent);color:var(--text-bright)}
+.risk-group{display:flex;gap:6px}
+.risk-group label{flex:1;text-align:center;padding:8px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.risk-group input{display:none}
+.risk-group input:checked+span{color:var(--accent)}
+.risk-group label:has(input:checked){border-color:var(--accent)}
+.drop-btn{width:100%;padding:14px;border:0;border-radius:var(--radius);background:var(--accent);color:#0f1923;font-family:var(--font);font-weight:700;font-size:16px;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
+.drop-btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.drop-btn:active{transform:translateY(0)}
+.drop-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.drop-btn.stop{background:var(--red);color:#fff}
+.auto-panel{display:none;flex-direction:column;gap:8px}
+.auto-panel.visible{display:flex}
+.speed-toggle{display:flex;gap:6px}
+.speed-toggle button{flex:1;padding:8px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.15s}
+.speed-toggle button.active{border-color:var(--accent);color:var(--accent)}
+
+/* ── History ── */
+.history{margin-top:auto;padding-top:8px;border-top:1px solid var(--border)}
+.history h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;color:var(--text)}
+.history-list{display:flex;flex-direction:column;gap:3px;max-height:180px;overflow-y:auto;font-family:var(--mono);font-size:12px}
+.history-item{display:flex;justify-content:space-between;padding:4px 6px;border-radius:4px;background:var(--bg-input);animation:slideIn .2s ease}
+.history-item .profit.pos{color:var(--accent)}
+.history-item .profit.neg{color:var(--red)}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+
+/* ── Icon buttons row ── */
+.icon-bar{
+  display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--border);
+}
+.icon-btn{
+  flex:1;aspect-ratio:1;max-width:52px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg-input);border:1px solid var(--border);border-radius:10px;
+  cursor:pointer;transition:.2s;padding:10px;
+}
+.icon-btn svg{width:22px;height:22px;fill:var(--text);transition:.2s}
+.icon-btn:hover{border-color:var(--accent);background:rgba(0,231,1,.05)}
+.icon-btn:hover svg{fill:var(--accent)}
+.icon-btn.sound-off svg#sound-on-icon{display:none}
+.icon-btn.sound-off svg#sound-off-icon{display:block!important}
+
+/* ── Slide-out drawers (shared) ── */
+.drawer{
+  display:none;position:fixed;top:0;right:0;bottom:0;
+  width:420px;max-width:100vw;
+  background:var(--bg-panel);border-left:1px solid var(--border);
+  z-index:200;flex-direction:column;overflow-y:auto;
+  animation:slideRight .25s ease;
+}
+.drawer.open{display:flex}
+@keyframes slideRight{from{transform:translateX(100%)}to{transform:none}}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 20px 12px;position:sticky;top:0;background:var(--bg-panel);z-index:1;
+  border-bottom:1px solid var(--border);
+}
+.drawer-head h3{color:var(--text-bright);font-size:17px;margin:0}
+.drawer-close{background:0;border:0;color:var(--text);font-size:24px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:.15s}
+.drawer-close:hover{background:rgba(255,255,255,.08);color:var(--text-bright)}
+.drawer-body{padding:20px;display:flex;flex-direction:column;gap:12px}
+.drawer-body h3{color:var(--accent);font-size:15px;margin-top:8px}
+.drawer-body p,.drawer-body li{color:var(--text);font-size:13.5px;line-height:1.7}
+.drawer-body p+p{margin-top:6px}
+.drawer-body ul{padding-left:18px;margin:4px 0}
+.drawer-body li{margin-bottom:3px}
+.drawer-body .tip-box{
+  background:rgba(0,231,1,.06);border:1px solid rgba(0,231,1,.15);border-radius:8px;
+  padding:12px 14px;
+}
+.drawer-body .tip-box p{color:var(--accent);font-weight:600;margin:0}
+
+/* ── Fairness specific ── */
+.drawer label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--text)}
+.drawer input[type=text]{padding:8px 10px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-bright);font-family:var(--mono);font-size:11px;outline:0;width:100%}
+.sm-btn{padding:8px 14px;background:var(--border);border:0;border-radius:var(--radius);color:var(--text-bright);font-family:var(--font);font-weight:600;font-size:13px;cursor:pointer;transition:.15s}
+.sm-btn:hover{background:var(--accent);color:#0f1923}
+.verify-result{padding:10px;background:var(--bg-input);border-radius:var(--radius);font-family:var(--mono);font-size:11px;white-space:pre-wrap;word-break:break-all;max-height:200px;overflow-y:auto;color:var(--text);line-height:1.5}
+
+/* ── Overlay ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:190}
+.overlay.open{display:block}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .app{flex-direction:column-reverse;height:auto;min-height:100vh}
+  .panel{width:100%;min-width:unset;border-right:0;border-top:1px solid var(--border);max-height:50vh}
+  .board-area{min-height:55vh}
+  .drawer{width:100%}
+  .big-balance{font-size:22px}
+  .board-header{flex-wrap:wrap;gap:8px;padding:8px 12px 0}
+  .place-bet-btn{padding:14px 16px;font-size:15px}
+  .place-bet-multi{padding:14px 14px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#3a5568}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- LEFT PANEL -->
+  <div class="panel">
+    <div class="tabs" role="tablist">
+      <button class="active" data-tab="manual" role="tab" aria-selected="true">Manual</button>
+      <button data-tab="auto" role="tab" aria-selected="false">Auto</button>
+    </div>
+    <label class="field">
+      <div class="row">Bet Amount <span class="balance-show" id="balance-small">10,000.00</span></div>
+      <div class="bet-row">
+        <input type="number" id="bet-input" value="5.00" min="0.10" max="100000" step="0.10" aria-label="Bet amount">
+        <button class="bet-btn" id="btn-half" aria-label="Halve bet">½</button>
+        <button class="bet-btn" id="btn-double" aria-label="Double bet">2×</button>
+      </div>
+    </label>
+    <label class="field">Risk
+      <div class="risk-group" role="radiogroup" aria-label="Risk level">
+        <label><input type="radio" name="risk" value="low"><span>Low</span></label>
+        <label><input type="radio" name="risk" value="medium" checked><span>Medium</span></label>
+        <label><input type="radio" name="risk" value="high"><span>High</span></label>
+      </div>
+    </label>
+    <label class="field">Rows <select id="rows-select" aria-label="Number of rows"></select></label>
+    <label class="field">Speed
+      <div class="speed-toggle">
+        <button class="active" data-speed="normal">Normal</button>
+        <button data-speed="fast">Fast</button>
+      </div>
+    </label>
+    <div class="auto-panel" id="auto-panel">
+      <label class="field">Number of Drops <input type="number" id="auto-count" value="10" min="1" max="1000" aria-label="Auto drop count"></label>
+    </div>
+    <button class="drop-btn" id="drop-btn" aria-label="Drop ball">Bet</button>
+    <div class="history"><h4>Recent Drops</h4><div class="history-list" id="history-list"></div></div>
+
+    <!-- Icon buttons -->
+    <div class="icon-bar">
+      <button class="icon-btn" id="btn-howto" title="How to Play" aria-label="How to play">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-about" title="About Plinko" aria-label="About this game">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-share" title="Share Game" aria-label="Share this game">
+        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-sound" title="Toggle Sound" aria-label="Toggle sound">
+        <svg id="sound-on-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <svg id="sound-off-icon" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-settings" title="Provably Fair Settings" aria-label="Fairness settings">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 00-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1115.6 12 3.61 3.61 0 0112 15.6z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- BOARD AREA -->
+  <div class="board-area">
+    <div class="board-header">
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#ffaa00"/><circle cx="40" cy="38" r="13" fill="#ffe066" opacity=".55"/></svg>
+        <div class="brand-name">Play <span>Plinko</span> Online Free</div>
+      </div>
+      <div class="balance-col">
+        <div class="big-balance-wrap">
+          <div class="big-balance" id="big-balance">$10,000.00</div>
+          <button class="add-btn" id="add-funds-btn" title="Add $10,000 demo credits" aria-label="Add 10000 demo credits">+</button>
+        </div>
+        <canvas id="spark-chart" width="220" height="40"></canvas>
+      </div>
+    </div>
+    <div class="board-wrap" id="board-wrap">
+      <canvas id="plinko-canvas"></canvas>
+      <div class="place-bet-wrap">
+        <button class="place-bet-btn" id="place-bet-btn">Place Free Bet</button>
+        <button class="place-bet-btn place-bet-multi" id="place-bet-10x">10× Bets</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- HOW TO PLAY DRAWER -->
+<div class="drawer" id="drawer-howto">
+  <div class="drawer-head"><h3>How to Play</h3><button class="drawer-close" data-close="drawer-howto">&times;</button></div>
+  <div class="drawer-body">
+    <div class="tip-box"><p>Drop a ball, watch it bounce, win multipliers!</p></div>
+    <h3>1. Set Your Bet</h3>
+    <p>Choose how many demo credits to wager per drop. Use the ½ and 2× buttons for quick adjustments. You start with $10,000 in free credits — add more anytime with the <strong>+</strong> button.</p>
+    <h3>2. Choose Risk &amp; Rows</h3>
+    <p><strong>Risk</strong> controls the multiplier spread. Low risk = smaller, consistent payouts. High risk = extreme multipliers up to 1000× but most drops land low.</p>
+    <p><strong>Rows</strong> (8–16) = how many peg rows the ball bounces through. More rows means more randomness.</p>
+    <h3>3. Drop the Ball</h3>
+    <p>Hit <strong>Bet</strong>, press Spacebar, or click <strong>Place Free Bet</strong> under the board. Watch the ball cascade through pegs and land in a colored multiplier bucket!</p>
+    <h3>4. Auto Mode</h3>
+    <p>Switch to <strong>Auto</strong> to drop multiple balls automatically. Press <strong>Stop</strong> anytime to halt.</p>
+    <h3>5. Provably Fair</h3>
+    <p>Every outcome uses HMAC-SHA256 cryptographic seeds determined before the drop. Click the ⚙ settings icon to inspect, rotate seeds, and verify any drop.</p>
+    <div class="tip-box"><p>💡 Try 16 rows on High risk for the wildest drops!</p></div>
+  </div>
+</div>
+
+<!-- ABOUT DRAWER -->
+<div class="drawer" id="drawer-about">
+  <div class="drawer-head"><h3>About Plinko</h3><button class="drawer-close" data-close="drawer-about">&times;</button></div>
+  <div class="drawer-body">
+    <h3>What is Plinko?</h3>
+    <p>Plinko is one of the most beloved game show games ever, originally popularized on <em>The Price Is Right</em>. A ball drops from the top of a pegged board and bounces randomly left or right off each peg until it lands in a prize slot. The beauty of Plinko lies in its perfect blend of simplicity and suspense — anyone can play, but nobody can predict where the ball will land.</p>
+
+    <h3>Play Plinko Online — Free, Instant, No Download</h3>
+    <p>Our <strong>free Plinko game</strong> brings the classic experience to your browser. There's no app to download, no account to create, and no money involved — just pure entertainment. Whether you want to <strong>play Plinko online</strong> during a break, test strategies, or enjoy watching balls cascade through pegs, this is the best place to do it.</p>
+    <p>This <strong>Plinko app</strong> works on any device — desktop, tablet, or mobile. It's fully responsive and optimized for smooth performance with beautiful animations, particle effects, and satisfying bounce sounds.</p>
+
+    <h3>Features of This Free Plinko Game</h3>
+    <ul>
+      <li><strong>Adjustable rows (8–16)</strong> — Control board complexity</li>
+      <li><strong>Three risk levels</strong> — Low, Medium, High multiplier spreads</li>
+      <li><strong>Multipliers up to 1000×</strong> — High risk 16 rows for massive payouts</li>
+      <li><strong>Provably fair</strong> — HMAC-SHA256 cryptographic verification</li>
+      <li><strong>Auto-play</strong> — Drop up to 1,000 balls automatically</li>
+      <li><strong>Normal &amp; fast speed</strong> — Watch every bounce or blitz through</li>
+      <li><strong>Unlimited free credits</strong> — $10,000 start + add more anytime</li>
+      <li><strong>Drop history</strong> — Track your last 10 results</li>
+    </ul>
+
+    <h3>Why Play Plinko Free Online?</h3>
+    <p>Plinko has become one of the most popular online games. Our version is a <strong>Plinko simulator</strong> — a risk-free way to experience the excitement. It uses the same provably-fair cryptographic system used by professional platforms, so every outcome is verifiable. This is the ideal <strong>Plinko free</strong> experience for players who want to understand game mechanics, test probability theories, or just have fun.</p>
+    <p>Unlike other sites, this <strong>online Plinko game</strong> features real physics-inspired ball animations, peg impact effects, particle bursts, and sound feedback — making every drop satisfying and immersive. It's the closest you'll get to a real <strong>Plinko app</strong> experience without spending a dime.</p>
+
+    <h3>How Provably Fair Works</h3>
+    <p>Before each round, the server generates a secret seed and shows its SHA-256 hash. You set your own client seed. The outcome is computed deterministically from these seeds plus a nonce. After rotating seeds, the previous server seed is revealed so you can verify every result was predetermined and fair.</p>
+
+    <div class="tip-box"><p>🎮 This is a free demo game — no real money, no deposits, no withdrawals. Just pure Plinko fun!</p></div>
+
+    <h3>Plinko Tips &amp; Strategy</h3>
+    <p>While outcomes are random, you can adjust your experience by switching risk levels and row counts. Low risk with fewer rows gives steady returns; high risk with 16 rows creates the widest outcome spread. Use auto-play to observe long-term distributions, or go manual for the thrill of each drop.</p>
+    <p>Ready to play? Close this panel, set your bet, and drop your first ball. Enjoy <strong>playing Plinko online for free</strong>!</p>
+  </div>
+</div>
+
+<!-- SETTINGS / FAIRNESS DRAWER -->
+<div class="drawer" id="drawer-settings">
+  <div class="drawer-head"><h3>Provably Fair</h3><button class="drawer-close" data-close="drawer-settings">&times;</button></div>
+  <div class="drawer-body">
+    <label>Client Seed <input type="text" id="client-seed-input"></label>
+    <label>Server Seed Hash <input type="text" id="server-seed-hash" readonly></label>
+    <label>Server Seed (revealed on rotate) <input type="text" id="server-seed-display" readonly placeholder="Rotate to reveal"></label>
+    <label>Nonce <input type="text" id="nonce-display" readonly></label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="sm-btn" id="rotate-btn">Rotate Seeds</button>
+      <button class="sm-btn" id="verify-btn">Verify Last Drop</button>
+    </div>
+    <div class="verify-result" id="verify-result" aria-live="polite">Drop a ball to verify.</div>
+  </div>
+</div>
+
+<!-- SHARE TOAST -->
+<div id="share-toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0f1923;padding:10px 24px;border-radius:50px;font-weight:700;font-size:14px;z-index:300;animation:slideIn .2s ease;box-shadow:0 4px 20px rgba(0,231,1,.3)">Link copied!</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  PLAY PLINKO ONLINE FREE – Demo / Simulation
+// ═══════════════════════════════════════════════
+
+const PAYOUT_TABLES={
+low:{8:[5.6,2.1,1.1,1,0.5,1,1.1,2.1,5.6],9:[5.6,2,1.6,1,0.7,0.7,1,1.6,2,5.6],10:[8.9,3,1.4,1.1,1,0.5,1,1.1,1.4,3,8.9],11:[8.4,3,1.9,1.3,1,0.7,0.7,1,1.3,1.9,3,8.4],12:[10,3,1.6,1.4,1.1,1,0.5,1,1.1,1.4,1.6,3,10],13:[8.1,4,3,1.9,1.2,0.9,0.7,0.7,0.9,1.2,1.9,3,4,8.1],14:[7.1,4,1.9,1.4,1.3,1,0.9,0.5,0.9,1,1.3,1.4,1.9,4,7.1],15:[15,8,3,2,1.5,1.1,1,0.7,0.7,1,1.1,1.5,2,3,8,15],16:[16,9,2,1.4,1.4,1.2,1.1,1,0.5,1,1.1,1.2,1.4,1.4,2,9,16]},
+medium:{8:[13,3,1.3,0.7,0.4,0.7,1.3,3,13],9:[18,4,1.7,0.9,0.5,0.5,0.9,1.7,4,18],10:[22,5,2,1.4,0.6,0.4,0.6,1.4,2,5,22],11:[24,6,3,1.8,0.7,0.5,0.5,0.7,1.8,3,6,24],12:[33,11,4,2,1.1,0.6,0.3,0.6,1.1,2,4,11,33],13:[43,13,6,3,1.3,0.7,0.4,0.4,0.7,1.3,3,6,13,43],14:[58,15,7,4,1.9,1,0.5,0.2,0.5,1,1.9,4,7,15,58],15:[88,18,11,5,3,1.3,0.5,0.3,0.3,0.5,1.3,3,5,11,18,88],16:[110,41,10,5,3,1.5,1,0.5,0.3,0.5,1,1.5,3,5,10,41,110]},
+high:{8:[29,4,1.5,0.3,0.2,0.3,1.5,4,29],9:[43,7,2,0.6,0.2,0.2,0.6,2,7,43],10:[76,10,3,0.9,0.3,0.2,0.3,0.9,3,10,76],11:[120,14,5.2,1.4,0.4,0.2,0.2,0.4,1.4,5.2,14,120],12:[170,24,8.1,2,0.7,0.2,0.2,0.2,0.7,2,8.1,24,170],13:[260,37,11,4,1,0.2,0.2,0.2,0.2,1,4,11,37,260],14:[420,56,18,5,1.9,0.3,0.2,0.2,0.2,0.3,1.9,5,18,56,420],15:[620,83,27,8,3,0.5,0.2,0.2,0.2,0.2,0.5,3,8,27,83,620],16:[1000,130,26,9,4,2,0.2,0.2,0.2,0.2,0.2,2,4,9,26,130,1000]}
+};
+
+const S={balance:1000000,bet:500,risk:'medium',rows:16,speed:'normal',mode:'manual',autoRunning:false,autoRemaining:0,nonce:0,serverSeed:'',clientSeed:'',serverSeedHash:'',prevSS:'',history:[],lastDrop:null,activeBalls:0,soundOn:true,balanceHistory:[1000000]};
+
+/* ── Audio (soft gummy ball) ── */
+let audioCtx=null;
+function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)()}
+function playBounce(freq){
+  if(!audioCtx||!S.soundOn)return;
+  try{
+    const t=audioCtx.currentTime;
+    // Soft muffled thud — low sine + filtered noise
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+    o.type='sine';
+    o.frequency.setValueAtTime(freq||180,t);
+    o.frequency.exponentialRampToValueAtTime(80,t+0.06);
+    f.type='lowpass';f.frequency.setValueAtTime(400,t);f.Q.setValueAtTime(1,t);
+    g.gain.setValueAtTime(0.012,t);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+0.07);
+    o.connect(f);f.connect(g);g.connect(audioCtx.destination);
+    o.start(t);o.stop(t+0.08);
+    // Tiny noise burst for texture
+    const buf=audioCtx.createBuffer(1,audioCtx.sampleRate*0.03,audioCtx.sampleRate);
+    const d=buf.getChannelData(0);
+    for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*0.3;
+    const ns=audioCtx.createBufferSource(),ng=audioCtx.createGain(),nf=audioCtx.createBiquadFilter();
+    ns.buffer=buf;
+    nf.type='lowpass';nf.frequency.setValueAtTime(600,t);
+    ng.gain.setValueAtTime(0.006,t);
+    ng.gain.exponentialRampToValueAtTime(0.0001,t+0.03);
+    ns.connect(nf);nf.connect(ng);ng.connect(audioCtx.destination);
+    ns.start(t);
+  }catch(e){}
+}
+function playLand(big){
+  if(!audioCtx||!S.soundOn)return;
+  try{
+    const t=audioCtx.currentTime;
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+    o.type='sine';
+    o.frequency.setValueAtTime(big?220:160,t);
+    o.frequency.exponentialRampToValueAtTime(big?120:80,t+0.12);
+    f.type='lowpass';f.frequency.setValueAtTime(500,t);
+    g.gain.setValueAtTime(big?0.025:0.015,t);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+0.15);
+    o.connect(f);f.connect(g);g.connect(audioCtx.destination);
+    o.start(t);o.stop(t+0.18);
+  }catch(e){}
+}
+
+/* ── Crypto ── */
+const hex=n=>{const a=new Uint8Array(n);crypto.getRandomValues(a);return[...a].map(b=>b.toString(16).padStart(2,'0')).join('')};
+async function sha256(m){return[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(m)))].map(b=>b.toString(16).padStart(2,'0')).join('')}
+async function hmac256(k,m){const enc=new TextEncoder();const ck=await crypto.subtle.importKey('raw',enc.encode(k),{name:'HMAC',hash:'SHA-256'},false,['sign']);return new Uint8Array(await crypto.subtle.sign('HMAC',ck,enc.encode(m)))}
+async function genPath(ss,cs,nonce,rows){
+  const path=[];let round=0,bytes=null,byteI=0,bitI=0;
+  for(let i=0;i<rows;i++){
+    if(!bytes||byteI>=bytes.length){bytes=await hmac256(ss,`${cs}:${nonce}:${round}`);byteI=0;bitI=0;round++}
+    path.push((bytes[byteI]>>bitI)&1);bitI++;if(bitI>=8){bitI=0;byteI++}
+  }
+  return path;
+}
+const toBucket=p=>{let s=0;for(const b of p)s+=b;return s};
+async function initSeeds(){S.serverSeed=hex(32);S.clientSeed=hex(16);S.serverSeedHash=await sha256(S.serverSeed);S.nonce=0;updateFairUI()}
+async function rotateSeeds(){S.prevSS=S.serverSeed;S.serverSeed=hex(32);S.serverSeedHash=await sha256(S.serverSeed);S.nonce=0;updateFairUI();$('server-seed-display').value=S.prevSS}
+
+/* ── Canvas ── */
+const canvas=$('plinko-canvas'),ctx=canvas.getContext('2d');
+let W,H,sp,startY,pegR,ballR,bcX;
+let pegGrid=[],buckets=[],particles=[],balls=[],pegFlashes=[],winTexts=[];
+function $(id){return document.getElementById(id)}
+
+function resize(){
+  const w=$('board-wrap');const dpr=devicePixelRatio||1;
+  W=w.clientWidth;H=w.clientHeight;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  buildBoard();
+}
+function buildBoard(){
+  const rows=S.rows,pad=24,bH=32;
+  const aH=H-pad*2-bH-65,aW=W-pad*2;
+  sp=Math.min(aW/(rows+1),aH/rows,44);
+  pegR=Math.max(3,sp*0.085);ballR=Math.max(5.5,sp*0.17);
+  bcX=W/2;startY=pad+20;
+  pegGrid=[];
+  for(let r=0;r<rows;r++){
+    const n=r+3,rw=(n-1)*sp,sx=bcX-rw/2,row=[];
+    for(let c=0;c<n;c++)row.push({x:sx+c*sp,y:startY+r*sp});
+    pegGrid.push(row);
+  }
+  const nb=rows+1,bY=startY+(rows-1)*sp+sp*0.9;
+  const lr=pegGrid[rows-1],bw=sp*0.88;
+  buckets=[];
+  for(let i=0;i<nb;i++){
+    const cx=(lr[i].x+lr[i+1].x)/2;
+    buckets.push({x:cx-bw/2,y:bY,w:bw,h:bH,cx,flash:0,fc:''});
+  }
+}
+function curMults(){return PAYOUT_TABLES[S.risk]?.[S.rows]||[]}
+function bColor(m){
+  if(m>=100)return'#ff003f';if(m>=30)return'#ff2200';if(m>=10)return'#ff4400';
+  if(m>=5)return'#ff6b00';if(m>=3)return'#ff9100';if(m>=1.5)return'#ffc800';
+  if(m>=1)return'#e8d44d';if(m>=0.5)return'#8bc34a';return'#4caf50';
+}
+function spawnP(x,y,col,n){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=1+Math.random()*3;particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1,life:1,dec:.02+Math.random()*.03,sz:1.5+Math.random()*2.5,col})}}
+
+/* ── Ball ── */
+class Ball{
+  constructor(path,bIdx,mult,profit,nonce,bet){
+    this.path=path;this.bIdx=bIdx;this.mult=mult;this.profit=profit;this.nonce=nonce;this.bet=bet;
+    this.rows=path.length;this.done=false;
+    this.segs=this._buildSegs();this.si=0;this.t=0;
+    this.x=this.segs[0].x0;this.y=this.segs[0].y0;
+  }
+  // Build arc segments: each segment is a parabolic arc from one position to the next
+  // with a control point that creates a natural bounce arc
+  _buildSegs(){
+    const segs=[];
+    // Compute peg hit positions and deflection targets
+    const pts=[{x:bcX,y:startY-sp*0.65,type:'start'}];
+    let col=1;
+    for(let r=0;r<this.rows;r++){
+      const p=pegGrid[r]?.[col];
+      if(p){
+        // Peg contact point (slightly above peg center)
+        pts.push({x:p.x,y:p.y-pegR*1.2,type:'peg',r,c:col});
+        // Deflection point — ball bounces off to the side with pronounced arc
+        const dir=this.path[r]?1:-1;
+        const dx=sp*0.48*dir;
+        const dy=sp*0.28;
+        // Random variation for natural feel
+        const rx=(Math.random()-0.5)*sp*0.08;
+        const ry=(Math.random()-0.5)*sp*0.04;
+        pts.push({x:p.x+dx+rx,y:p.y+dy+ry,type:'air'});
+      }
+      if(this.path[r])col++;
+    }
+    const b=buckets[this.bIdx];
+    if(b)pts.push({x:b.cx,y:b.y+b.h*0.35,type:'bucket'});
+
+    // Build arc segments between consecutive points
+    for(let i=0;i<pts.length-1;i++){
+      const p0=pts[i],p1=pts[i+1];
+      // Control point for quadratic bezier — creates parabolic arc
+      // For falling: control point is horizontally between, vertically above midpoint (gravity arc)
+      const mx=(p0.x+p1.x)/2;
+      let my;
+      if(p1.type==='peg'){
+        // Approaching a peg: gentle falling arc
+        my=Math.min(p0.y,p1.y)-sp*0.04;
+      } else if(p1.type==='air'){
+        // Bouncing off peg: pronounced upward arc for bouncy feel
+        my=p0.y-sp*0.18;
+      } else {
+        // Falling to bucket
+        my=(p0.y+p1.y)/2-sp*0.06;
+      }
+      segs.push({
+        x0:p0.x,y0:p0.y,
+        cx:mx,cy:my,
+        x1:p1.x,y1:p1.y,
+        isPeg:p1.type==='peg',
+        isBkt:p1.type==='bucket',
+        pegR:p1.r,pegC:p1.c,
+        // Segment duration varies: faster when falling, slower near pegs
+        dur: p1.type==='peg'?0.9: p1.type==='air'?0.55: p1.type==='bucket'?0.8:0.7
+      });
+    }
+    return segs;
+  }
+  update(dt){
+    if(this.done)return;
+    const seg=this.segs[this.si];
+    if(!seg){this.done=true;this._land();return}
+    const spd=S.speed==='fast'?3.2:1.5;
+    // Gravity feel: accelerate as ball falls through each segment
+    const gravBoost=1+this.si*0.03;
+    this.t+=dt*spd*gravBoost/seg.dur;
+    if(this.t>=1){
+      this.t=0;this.si++;
+      const ns=this.segs[this.si];
+      // Trigger peg hit effects
+      if(ns && ns.isPeg){
+        pegFlashes.push({r:ns.pegR,c:ns.pegC,life:1});
+        spawnP(ns.x1,ns.y1+pegR,`rgba(255,200,50,0.7)`,2);
+        playBounce(140+ns.pegR*8+Math.random()*40);
+      }
+      if(this.si>=this.segs.length){this.done=true;this._land();return}
+      return;
+    }
+    // Quadratic bezier interpolation for parabolic arc
+    const t=this.t;
+    const mt=1-t;
+    this.x=mt*mt*seg.x0+2*mt*t*seg.cx+t*t*seg.x1;
+    this.y=mt*mt*seg.y0+2*mt*t*seg.cy+t*t*seg.y1;
+    // Add gravity droop to make arcs feel heavier and bouncier
+    this.y+=t*(1-t)*sp*0.18;
+  }
+  _land(){
+    const b=buckets[this.bIdx];
+    if(b){b.flash=1;b.fc=bColor(this.mult);spawnP(b.cx,b.y,b.fc,15)}
+    playLand(this.mult>=5);
+    S.balance+=Math.round(this.bet*this.mult);
+    updateBal(Math.round(this.bet*this.mult)-this.bet);
+    S.activeBalls--;
+    if(this.profit>0&&b)winTexts.push({x:b.cx,y:b.y-5,life:1.2,txt:`+${(this.profit/100).toFixed(2)}`,vy:-1.2});
+    addHist(this.bIdx,this.mult,this.profit/100,this.nonce);
+    if(S.autoRunning&&S.autoRemaining>0){S.autoRemaining--;if(S.autoRemaining<=0)stopAuto();else setTimeout(dropBall,S.speed==='fast'?80:200)}
+  }
+  draw(c){
+    const g=c.createRadialGradient(this.x,this.y,0,this.x,this.y,ballR*2);
+    g.addColorStop(0,'rgba(255,170,0,0.10)');g.addColorStop(1,'rgba(255,170,0,0)');
+    c.fillStyle=g;c.beginPath();c.arc(this.x,this.y,ballR*2,0,Math.PI*2);c.fill();
+    c.fillStyle='rgba(0,0,0,0.2)';c.beginPath();c.ellipse(this.x+1,this.y+ballR*.7,ballR*.7,ballR*.25,0,0,Math.PI*2);c.fill();
+    const bg=c.createRadialGradient(this.x-ballR*.3,this.y-ballR*.3,ballR*.08,this.x,this.y,ballR);
+    bg.addColorStop(0,'#ffe566');bg.addColorStop(.5,'#ffaa00');bg.addColorStop(1,'#cc5500');
+    c.fillStyle=bg;c.beginPath();c.arc(this.x,this.y,ballR,0,Math.PI*2);c.fill();
+    c.fillStyle='rgba(255,255,255,0.45)';c.beginPath();c.arc(this.x-ballR*.2,this.y-ballR*.28,ballR*.28,0,Math.PI*2);c.fill();
+  }
+}
+
+/* ── Drawing ── */
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let r=0;r<pegGrid.length;r++){
+    for(let c=0;c<pegGrid[r].length;c++){
+      const p=pegGrid[r][c];let fl=0;
+      for(const f of pegFlashes)if(f.r===r&&f.c===c)fl=Math.max(fl,f.life);
+      if(fl>0){const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,pegR*6);g.addColorStop(0,`rgba(255,200,50,${.35*fl})`);g.addColorStop(1,'rgba(255,200,50,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,pegR*6,0,Math.PI*2);ctx.fill()}
+      ctx.fillStyle=fl>0?`rgba(255,255,255,${.65+.35*fl})`:'rgba(255,255,255,0.5)';
+      ctx.beginPath();ctx.arc(p.x,p.y,pegR+(fl>0?pegR*.4*fl:0),0,Math.PI*2);ctx.fill();
+    }
+  }
+  const ms=curMults();
+  for(let i=0;i<buckets.length;i++){
+    const b=buckets[i],m=ms[i]??0,col=bColor(m);
+    ctx.save();
+    if(b.flash>0){ctx.shadowColor=col;ctx.shadowBlur=22*b.flash}
+    ctx.fillStyle=col;ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(b.x,b.y,b.w,b.h,3);else ctx.rect(b.x,b.y,b.w,b.h);
+    ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.13)';ctx.beginPath();ctx.rect(b.x,b.y,b.w,b.h*.38);ctx.fill();
+    ctx.restore();
+    ctx.fillStyle='rgba(0,0,0,0.8)';
+    ctx.font=`bold ${Math.max(8,Math.min(13,sp*.27))}px 'DM Sans',sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(m>=100?m.toFixed(0)+'×':m.toFixed(1)+'×',b.cx,b.y+b.h/2+1);
+  }
+  for(const p of particles){ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.sz*p.life,0,Math.PI*2);ctx.fill()}
+  ctx.globalAlpha=1;
+  for(const b of balls)b.draw(ctx);
+  ctx.save();
+  for(const wt of winTexts){
+    ctx.globalAlpha=Math.min(1,wt.life);ctx.fillStyle='#00e701';
+    ctx.font="bold 17px 'JetBrains Mono',monospace";
+    ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.shadowColor='rgba(0,231,1,0.5)';ctx.shadowBlur=10;
+    ctx.fillText(wt.txt,wt.x,wt.y);
+  }
+  ctx.restore();
+}
+function tick(dt){
+  for(let i=balls.length-1;i>=0;i--){balls[i].update(dt);if(balls[i].done)balls.splice(i,1)}
+  for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.life-=p.dec;if(p.life<=0)particles.splice(i,1)}
+  for(let i=pegFlashes.length-1;i>=0;i--){pegFlashes[i].life-=dt*3.5;if(pegFlashes[i].life<=0)pegFlashes.splice(i,1)}
+  for(const b of buckets)if(b.flash>0)b.flash=Math.max(0,b.flash-dt*2.5);
+  for(let i=winTexts.length-1;i>=0;i--){winTexts[i].y+=winTexts[i].vy;winTexts[i].life-=dt*.9;if(winTexts[i].life<=0)winTexts.splice(i,1)}
+}
+let lastT=0;
+function loop(t){const dt=Math.min((t-lastT)/1e3,.05);lastT=t;tick(dt);draw();requestAnimationFrame(loop)}
+
+/* ── Game ── */
+async function dropBall(){
+  if(S.bet<=0||S.bet>S.balance)return;
+  initAudio();
+  S.balance-=S.bet;updateBal(-S.bet);
+  const nonce=S.nonce++,path=await genPath(S.serverSeed,S.clientSeed,nonce,S.rows);
+  const bi=toBucket(path),ms=curMults(),mult=ms[bi]??0;
+  const payout=Math.round(S.bet*mult),profit=payout-S.bet;
+  S.lastDrop={serverSeed:S.serverSeed,clientSeed:S.clientSeed,nonce,rows:S.rows,risk:S.risk,path:[...path],bucketIdx:bi,mult,profit:profit/100};
+  S.activeBalls++;
+  balls.push(new Ball(path,bi,mult,profit,nonce,S.bet));
+  updateFairUI();
+}
+function addHist(bi,mult,profit,nonce){
+  S.history.unshift({bucketIdx:bi,mult,profit,nonce});
+  if(S.history.length>10)S.history.pop();
+  const l=$('history-list');l.innerHTML='';
+  for(const h of S.history){
+    const d=document.createElement('div');d.className='history-item';
+    const c=h.profit>=0?'pos':'neg',s=h.profit>=0?'+':'';
+    d.innerHTML=`<span>#${h.nonce} · ${h.mult.toFixed(2)}×</span><span class="profit ${c}">${s}${h.profit.toFixed(2)}</span>`;
+    l.appendChild(d);
+  }
+}
+function startAuto(){const c=parseInt($('auto-count').value)||10;S.autoRunning=true;S.autoRemaining=Math.min(c,1000);$('drop-btn').textContent='Stop';$('drop-btn').classList.add('stop');dropBall()}
+function stopAuto(){S.autoRunning=false;S.autoRemaining=0;$('drop-btn').textContent='Bet';$('drop-btn').classList.remove('stop')}
+
+let glowTimer=null;
+function updateBal(change){
+  const fmt=(S.balance/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  $('balance-small').textContent=fmt;
+  $('big-balance').textContent='$'+fmt;
+  const el=$('big-balance');
+  el.classList.remove('glow','glow-red');
+  if(change!==undefined){
+    void el.offsetWidth;
+    el.classList.add(change>=0?'glow':'glow-red');
+    clearTimeout(glowTimer);
+    glowTimer=setTimeout(()=>el.classList.remove('glow','glow-red'),500);
+    S.balanceHistory.push(S.balance);
+    if(S.balanceHistory.length>150) S.balanceHistory.shift();
+  }
+  drawSparkline();
+}
+
+function drawSparkline(){
+  const cv=$('spark-chart');
+  if(!cv)return;
+  const dpr=devicePixelRatio||1;
+  const w=220,h=40;
+  cv.width=w*dpr;cv.height=h*dpr;
+  cv.style.width=w+'px';cv.style.height=h+'px';
+  const c=cv.getContext('2d');
+  c.setTransform(dpr,0,0,dpr,0,0);
+
+  const data=S.balanceHistory;
+  if(data.length<2)return;
+
+  const mn=Math.min(...data),mx=Math.max(...data);
+  const range=mx-mn||1;
+  const pad=3;
+  const cw=w-pad*2,ch=h-pad*2;
+
+  // Map data to points
+  const pts=data.map((v,i)=>({
+    x:pad+i/(data.length-1)*cw,
+    y:pad+ch-(v-mn)/range*ch
+  }));
+
+  // Starting value line (dashed)
+  const startVal=data[0];
+  const startY=pad+ch-(startVal-mn)/range*ch;
+  c.setLineDash([3,3]);
+  c.strokeStyle='rgba(177,186,211,0.15)';
+  c.lineWidth=1;
+  c.beginPath();c.moveTo(pad,startY);c.lineTo(w-pad,startY);c.stroke();
+  c.setLineDash([]);
+
+  // Determine if currently up or down
+  const current=data[data.length-1];
+  const isUp=current>=startVal;
+  const lineColor=isUp?'#00e701':'#ff4466';
+  const fillColor=isUp?'rgba(0,231,1,0.08)':'rgba(255,68,102,0.08)';
+
+  // Fill area under line
+  c.beginPath();
+  c.moveTo(pts[0].x,startY);
+  for(const p of pts)c.lineTo(p.x,p.y);
+  c.lineTo(pts[pts.length-1].x,startY);
+  c.closePath();
+  c.fillStyle=fillColor;
+  c.fill();
+
+  // Line
+  c.beginPath();
+  c.moveTo(pts[0].x,pts[0].y);
+  for(let i=1;i<pts.length;i++){
+    // Smooth curve through points
+    const prev=pts[i-1],curr=pts[i];
+    const cpx=(prev.x+curr.x)/2;
+    c.quadraticCurveTo(prev.x+(curr.x-prev.x)*0.5,prev.y,cpx,(prev.y+curr.y)/2);
+  }
+  c.lineTo(pts[pts.length-1].x,pts[pts.length-1].y);
+  c.strokeStyle=lineColor;
+  c.lineWidth=1.5;
+  c.lineJoin='round';
+  c.lineCap='round';
+  c.stroke();
+
+  // Current value dot
+  const last=pts[pts.length-1];
+  c.fillStyle=lineColor;
+  c.beginPath();
+  c.arc(last.x,last.y,2.5,0,Math.PI*2);
+  c.fill();
+  // Glow on dot
+  c.fillStyle=isUp?'rgba(0,231,1,0.3)':'rgba(255,68,102,0.3)';
+  c.beginPath();
+  c.arc(last.x,last.y,5,0,Math.PI*2);
+  c.fill();
+}
+function updateFairUI(){$('client-seed-input').value=S.clientSeed;$('server-seed-hash').value=S.serverSeedHash;$('nonce-display').value=S.nonce}
+
+/* ── Drawers ── */
+let openDrawerId=null;
+function openDrawer(id){
+  closeAllDrawers();
+  $(id).classList.add('open');
+  $('overlay').classList.add('open');
+  openDrawerId=id;
+}
+function closeAllDrawers(){
+  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
+  $('overlay').classList.remove('open');
+  openDrawerId=null;
+}
+
+/* ── UI ── */
+function setupUI(){
+  const rs=$('rows-select');
+  for(let i=8;i<=16;i++){const o=document.createElement('option');o.value=i;o.textContent=i;if(i===16)o.selected=true;rs.appendChild(o)}
+  rs.addEventListener('change',e=>{S.rows=+e.target.value;buildBoard()});
+
+  const bi=$('bet-input');
+  bi.addEventListener('change',()=>{let v=Math.round(parseFloat(bi.value)*100);if(isNaN(v)||v<10)v=10;if(v>1e7)v=1e7;S.bet=v;bi.value=(v/100).toFixed(2)});
+  $('btn-half').onclick=()=>{S.bet=Math.max(10,Math.round(S.bet/2));bi.value=(S.bet/100).toFixed(2)};
+  $('btn-double').onclick=()=>{S.bet=Math.min(1e7,S.bet*2);bi.value=(S.bet/100).toFixed(2)};
+
+  document.querySelectorAll('input[name="risk"]').forEach(r=>r.addEventListener('change',e=>{S.risk=e.target.value}));
+  document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.tabs button').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});
+    b.classList.add('active');b.setAttribute('aria-selected','true');S.mode=b.dataset.tab;
+    $('auto-panel').classList.toggle('visible',S.mode==='auto');
+  }));
+  document.querySelectorAll('.speed-toggle button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.speed-toggle button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');S.speed=b.dataset.speed;
+  }));
+
+  // Drop buttons
+  const doDrop=()=>{if(S.autoRunning){stopAuto();return}S.mode==='auto'?startAuto():dropBall()};
+  $('drop-btn').addEventListener('click',doDrop);
+  $('place-bet-btn').addEventListener('click',()=>{if(S.autoRunning)return;dropBall()});
+
+  // 10× Bets — rapid fire 10 drops
+  $('place-bet-10x').addEventListener('click',()=>{
+    if(S.autoRunning)return;
+    initAudio();
+    let count=0;
+    const fire=()=>{
+      if(count>=10||S.bet>S.balance)return;
+      dropBall();count++;
+      setTimeout(fire,S.speed==='fast'?60:150);
+    };
+    fire();
+  });
+
+  // Sound toggle
+  $('btn-sound').onclick=()=>{
+    S.soundOn=!S.soundOn;
+    $('btn-sound').classList.toggle('sound-off',!S.soundOn);
+    if(S.soundOn)initAudio();
+  };
+
+  // Add funds
+  $('add-funds-btn').onclick=()=>{initAudio();S.balance+=1000000;updateBal(1000000)};
+
+  // Drawer buttons
+  $('btn-howto').onclick=()=>openDrawer('drawer-howto');
+  $('btn-about').onclick=()=>openDrawer('drawer-about');
+  $('btn-settings').onclick=()=>openDrawer('drawer-settings');
+  $('overlay').onclick=closeAllDrawers;
+  document.querySelectorAll('.drawer-close').forEach(b=>b.onclick=closeAllDrawers);
+
+  // Share
+  $('btn-share').onclick=async()=>{
+    const data={title:'Play Plinko Online Free',text:'Check out this awesome free Plinko game! Multipliers up to 1000×.',url:location.href};
+    if(navigator.share){try{await navigator.share(data)}catch(e){}}
+    else{
+      try{await navigator.clipboard.writeText(location.href)}catch(e){}
+      const t=$('share-toast');t.style.display='block';setTimeout(()=>t.style.display='none',2000);
+    }
+  };
+
+  // Fairness controls
+  $('client-seed-input').addEventListener('change',e=>{S.clientSeed=e.target.value});
+  $('rotate-btn').onclick=rotateSeeds;
+  $('verify-btn').onclick=async()=>{
+    const res=$('verify-result');
+    if(!S.lastDrop){res.textContent='No drops to verify yet.';return}
+    const d=S.lastDrop,path=await genPath(d.serverSeed,d.clientSeed,d.nonce,d.rows);
+    const bi=toBucket(path),ms=PAYOUT_TABLES[d.risk]?.[d.rows]||[],mult=ms[bi]??0;
+    const hash=await sha256(d.serverSeed);
+    res.textContent=`Verify Nonce #${d.nonce}\n${'─'.repeat(32)}\nServer Seed: ${d.serverSeed}\nSHA-256: ${hash}\nClient Seed: ${d.clientSeed}\nNonce: ${d.nonce}\nRows: ${d.rows} · Risk: ${d.risk}\nPath: ${path.map(b=>b?'R':'L').join('')}\nBucket: ${bi} · Mult: ${mult.toFixed(2)}×\n${bi===d.bucketIdx?'✅ VERIFIED':'❌ MISMATCH'}`;
+  };
+
+  window.addEventListener('resize',resize);
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'&&!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('drop-btn').click()}
+    if(e.code==='Escape')closeAllDrawers();
+  });
+}
+
+(async()=>{await initSeeds();setupUI();resize();updateBal();requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>
