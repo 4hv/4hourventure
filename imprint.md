@@ -16,6 +16,9 @@ Inhaltlich Verantwortlicher gemäß § 10 Absatz 3 MDStV:
 
 Andreas Dittes (Anschrift wie oben)
 
+### Hinweis gemäß § 36 VSBG:
+Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+
 ### Haftungshinweis 
 
 Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
