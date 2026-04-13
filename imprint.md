@@ -4,9 +4,9 @@ Diese Seite ist ein publizistisches Angebot von:
 
 Andreas Dittes 
 
-Invalidenstr. 39 
+Bautzener Str. 35
 
-10115 Berlin
+10829 Berlin
 
 Mobile: +49 178 554 90 30 
 
